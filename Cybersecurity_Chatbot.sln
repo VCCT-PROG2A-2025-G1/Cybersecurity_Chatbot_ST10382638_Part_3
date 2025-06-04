@@ -5,7 +5,7 @@ VisualStudioVersion = 17.13.35818.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cybersecurity_Chatbot", "Cybersecurity_Chatbot.csproj", "{7110D3CB-52F4-4436-9EE0-EFD5CFA6D9C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cybersecurity_Chatbot_GUI", "Cybersecurity_Chatbot_GUI\Cybersecurity_Chatbot_GUI.csproj", "{31C257B5-4F6B-43AF-9DC2-281EF8446D8A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cybersecurity_Chatbot_GUI", "Cybersecurity_Chatbot_GUI\Cybersecurity_Chatbot_GUI.csproj", "{A6D0541D-C01A-43FB-8E28-98592086CC92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{7110D3CB-52F4-4436-9EE0-EFD5CFA6D9C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7110D3CB-52F4-4436-9EE0-EFD5CFA6D9C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7110D3CB-52F4-4436-9EE0-EFD5CFA6D9C5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{31C257B5-4F6B-43AF-9DC2-281EF8446D8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31C257B5-4F6B-43AF-9DC2-281EF8446D8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31C257B5-4F6B-43AF-9DC2-281EF8446D8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31C257B5-4F6B-43AF-9DC2-281EF8446D8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6D0541D-C01A-43FB-8E28-98592086CC92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6D0541D-C01A-43FB-8E28-98592086CC92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6D0541D-C01A-43FB-8E28-98592086CC92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6D0541D-C01A-43FB-8E28-98592086CC92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

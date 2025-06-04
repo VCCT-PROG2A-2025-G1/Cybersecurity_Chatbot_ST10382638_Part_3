@@ -27,7 +27,7 @@ namespace Cybersecurity_Chatbot
         /// </summary>
         public static async Task StartupAsync()
         {
-            cmdSetup();
+            //cmdSetup();
 
             // Start both visual and audio greetings in parallel
             Task asciiTask = AsciiArtAsync();

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{31C257B5-4F6B-43AF-9DC2-281EF8446D8A}</ProjectGuid>
+    <ProjectGuid>{A6D0541D-C01A-43FB-8E28-98592086CC92}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Cybersecurity_Chatbot_GUI</RootNamespace>
     <AssemblyName>Cybersecurity_Chatbot_GUI</AssemblyName>
@@ -55,11 +55,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Bridge\WpfConsoleReader.cs" />
-    <Compile Include="Bridge\WpfConsoleWriter.cs" />
-    <Compile Include="Views\ChatWindow.xaml.cs">
-      <DependentUpon>ChatWindow.xaml</DependentUpon>
-    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -68,14 +63,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Bridge\WpfConsoleWriter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\ChatWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
