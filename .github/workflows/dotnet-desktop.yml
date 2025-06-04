@@ -1,0 +1,31 @@
+# Name of the workflow as it will appear in the GitHub Actions tab
+name: Build .NET Framework App
+
+# Trigger this workflow only when pushing or creating pull requests to the 'master' branch
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    name: Build on Windows  # Job description shown in GitHub Actions UI
+    runs-on: windows-latest  # .NET Framework requires Windows runners
+
+    steps:
+      # Step 1: Download your repository's code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up MSBuild (required for building .NET Framework projects)
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.3.1
+
+      # Step 3: Restore NuGet packages (libraries your project depends on)
+      - name: Restore NuGet packages
+        run: nuget restore Cybersecurity_Chatbot.sln
+
+      # Step 4: Build your solution using MSBuild
+      - name: Build solution
+        run: msbuild Cybersecurity_Chatbot.sln /p:Configuration=Release
