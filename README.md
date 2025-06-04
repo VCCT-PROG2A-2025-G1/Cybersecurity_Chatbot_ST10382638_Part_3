@@ -1,4 +1,4 @@
-# Cybersecurity Awareness Chatbot – Part 2
+# Cybersecurity Awareness Chatbot – Part 3 (GUI with WPF)
 
 **Student Name:** Luc de Marillac St Julein  
 **Student Number:** ST10382638  
@@ -8,156 +8,121 @@
 
 ---
 
-## Project Overview
+## 🚀 Project Overview
 
-This is the second phase of the console-based **Cybersecurity Awareness Chatbot**, enhancing the original system to provide more realistic, intelligent, and supportive interactions. Developed for the PROG6221 Portfolio of Evidence, **Part 2** introduces dynamic responses, simple sentiment detection, and basic user memory — improving educational engagement on cybersecurity topics.
-
----
-
-## New Features in Part 2
-
-- **Keyword Recognition** – Recognises key topics such as "VPN", "phishing", and "passwords" even when mentioned in longer sentences.
-- **Randomised Responses** – Certain topics now respond with a random tip or fact to simulate natural variation.
-- **Sentiment Detection** – Detects emotional input like "worried", "frustrated", or "curious", and replies with empathy.
-- **Memory Feature** – Stores what the user says they’re interested in (e.g., “I’m interested in VPN”) and recalls it when asked.
-- **Expanded Input Validation** – Prevents blank input and handles vague questions with supportive fallback messages.
-- **Conversation Flow** – Politely prompts the user if they’d like to continue before exiting.
-- **Modular Code Design** – Separated into `ChatBot`, `ResponseBank`, `Memory`, and `StartUp` classes for better organisation.
+This is the final WPF-based version of the **Cybersecurity Awareness Chatbot**, completing the Portfolio of Evidence (Part 3) for PROG6221. This version transforms the console chatbot into a full Windows GUI application using **WPF (.NET 4.8)**. It includes animations, audio, interaction logging, and mini-apps like a task manager and cybersecurity quiz — all themed around educating users on cybersecurity best practices.
 
 ---
 
-## Cybersecurity Topics Recognised
+## 🧠 Key Features (New in Part 3)
 
-- Password Safety
-- Phishing
-- Malware
-- Antivirus Software
+- **WPF GUI Interface** – Replaces console with a sleek modern UI using XAML.
+- **ASCII Art with Voice Greeting** – Displays skull-themed art with a greeting sound effect.
+- **Typing Effect** – Chatbot types out each response character-by-character.
+- **"ChatBot is thinking..." Animation** – Simulates a realistic delay before responding.
+- **Activity Logging** – Tracks interactions like quiz answers and task creation.
+- **Quiz Module** – 10-question cybersecurity quiz with scoring and input validation.
+- **Task Assistant** – GUI form to create, complete, and delete tasks with reminders.
+- **Memory System** – Remembers topics the user is interested in.
+- **Confirmation-Based Exit** – Confirms before exiting the app.
+
+---
+
+## 💬 Recognized Cybersecurity Topics
+
 - VPNs
-- Encryption
-- Social Engineering
-- Identity Theft
-- Firewalls
+- Passwords
+- Phishing
 - Safe Browsing
+- Antivirus
+- Malware
+- Firewalls
+- Social Engineering
+- Encryption
+- Identity Theft
 
 ---
 
-## Setup Instructions (Using Visual Studio Only)
+## 🛠 Setup Instructions
 
-### Requirements
+### Prerequisites
 
-Make sure you have:
+- **Visual Studio 2022** with **.NET Desktop Development**
+- **.NET Framework 4.8**
 
-- [Visual Studio 2022 or newer](https://visualstudio.microsoft.com/downloads/)
-  - Install the “.NET desktop development” workload
-- [.NET Framework 4.8](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48)
+### How to Run
 
----
-
-### How to Download the Project (Without Git)
-
-1. Visit the repository:  
+1. **Download ZIP:**
    [https://github.com/VCCT-PROG2A-2025-G1/Cybersecurity_Chatbot_ST10382638](https://github.com/VCCT-PROG2A-2025-G1/Cybersecurity_Chatbot_ST10382638)
 
-2. Click the green **Code** button → **Download ZIP**
+2. Extract the contents.
 
-3. Right-click the ZIP file → **Extract All**
+3. Open `Cybersecurity_Chatbot.sln` in Visual Studio.
 
-4. Inside the extracted folder, you should see:
-   - `.cs` files (source code)
-   - `Greeting Message.wav`
-   - `.csproj` file
+4. Press `F5` to run.
 
 ---
 
-### Opening and Running the Project in Visual Studio
+## 🧪 How to Use
 
-1. Open **Visual Studio**
-
-2. Click **Open a project or solution**
-
-3. Navigate to the extracted folder and open **CybersecurityChatbot.csproj**
-
-4. From the top menu, click **Build > Build Solution**  
-   - Wait for the “Build succeeded” message
-
-5. Press the green **Start button** (or hit `F5`) to run the chatbot
+| Command | Action |
+|---------|--------|
+| `start quiz` | Launches the 10-question cybersecurity quiz |
+| `remind me to...` | Opens the Task Assistant window |
+| `view log` | Shows all recent activity |
+| `goodbye` → `no` | Triggers shutdown confirmation |
+| `what is phishing?` | Asks the bot anything cybersecurity-related |
 
 ---
 
-### What to Expect
+## 📹 Demo Video
 
-- A voice greeting will play  
-- ASCII art will appear  
-- You'll be prompted to enter your name  
-- The chatbot will start the conversation  
-- You can ask about cybersecurity or say how you’re feeling  
-- You can type “I’m interested in [topic]” and ask “What did I say earlier?”
+Watch the chatbot in action:  
+🔗 [https://youtu.be/_d8Ma3ey9tc](https://youtu.be/_d8Ma3ey9tc)
 
 ---
 
-## Continuous Integration (CI)
+## ✅ Post-Video Enhancements
 
-- GitHub Actions runs on every push to verify the project builds successfully.  
-- Includes a `.yml` workflow for .NET compilation check.  
-- Screenshot of passing CI (green checkmark) is included in the submission folder.
-
----
-
-## Demonstration Video
-
-Watch the updated bot in action:  
-[Video for project](https://youtu.be/_d8Ma3ey9tc)
+- Improved exit logic (confirmation before shutdown)
+- Typing animation
+- Thinking animation using dot animation
+- Memory enhancement: recalls prior interest topic
+- Input is blocked during startup animation
 
 ---
 
-## Post-Video Code Enhancement
+## 📁 Included Files
 
-> This feature was added **after the video demonstration** was recorded.
+- `ChatWindow.xaml` – Main WPF chat UI
+- `WpfChatBot.cs` – Handles all input and logic
+- `CyberQuiz.cs` – Quiz logic with validation
+- `TaskWindow.xaml` – GUI task assistant
+- `ActivityLog.cs` – Logging system
+- `ResponseBank.cs` – Cybersecurity responses
+- `Greeting Message.wav` – Voice greeting
+- `StartUp.cs` – Plays greeting and prints ASCII art
+- `Memory.cs` – Stores user interests
 
-A new feature was implemented to improve the chatbot’s follow-up logic when a user says `"yes"`, `"sure"`, or `"yeah"` in response to a previously remembered topic — as well as if they say `"no"` to decline.
+---
 
-The chatbot now retrieves the previously stored **interest topic** from memory and loops through all known response keywords to find a matching topic. If a match is found, it selects and returns a random response related to that topic. If the user says "no", the bot politely ends that line of conversation.
+## ✅ Continuous Integration
 
-### New Logic Example
+- GitHub Actions checks every commit
+- Project builds must pass before being merged
+- CI `.yml` workflow included
 
-```csharp
-if ((cleanedInput.Contains("yes") || cleanedInput.Contains("yeah") || cleanedInput.Contains("sure")) && previousQuestion)
-{
-    string topic = Memory.Recall("interest")?.ToLower().Trim();
+---
 
-    foreach (var keyword in responses.Keys)
-    {
-        if (topic.Contains(keyword))
-        {
-            previousQuestion = false;
-            List<string> possibleResponses = responses[keyword];
-            return possibleResponses[rand.Next(possibleResponses.Count)];
-        }
-    }
-
-    previousQuestion = false;
-    return "I'm sorry, I don't understand. Try asking me about something cybersecurity-related.";
-}
-
-// Handle negative response if previous question was asked
-if ((cleanedInput.Contains("no") || cleanedInput.Contains("nope") || cleanedInput.Contains("nah")) && previousQuestion)
-{
-    previousQuestion = false;
-    return "Alright! Let me know if you'd like help with anything else.";
-}
-
-```
 ## References
 
-- [W3Schools C# Tutorials](https://www.w3schools.com/cs/index.php)
+- [W3Schools C#](https://www.w3schools.com/cs/)
+- [ASCII Generator](https://ascii.co.uk/)
+- [TTSMP3](https://ttsmp3.com)
 - [ChatGPT](https://chat.openai.com)
-- [ASCII Art Generator](https://ascii.co.uk/)
-- [TTSMP3 - Text to Speech Tool](https://ttsmp3.com)
 
 ---
 
-## Disclaimer
+## 📌 Disclaimer
 
-This project is developed for educational purposes only, submitted as part of the Programming 2A module for The Independent Institute of Education. All rights reserved.
-
----
+This application is a coursework submission for the IIE's Programming 2A module. It is intended for educational use only.
