@@ -42,7 +42,8 @@ namespace Cybersecurity_Chatbot_GUI.Logic
             }
 
             _username = input.Trim();
-            return $"ChatBot: Hello {_username}, nice to meet you!";
+            ActivityLog.Log($"User set name to {_username}");
+            return $"Hello {_username}, nice to meet you!";
         }
 
         public string ProcessInput(string input)
@@ -67,7 +68,7 @@ namespace Cybersecurity_Chatbot_GUI.Logic
                 else
                 {
                     _awaitingGoodbye = false;
-                    return "ChatBot: Great! What else would you like to know?";
+                    return "Great! What else would you like to know?";
                 }
             }
 
@@ -87,7 +88,8 @@ namespace Cybersecurity_Chatbot_GUI.Logic
             if (input.Contains("remind me") || input.Contains("add task") || input.Contains("set reminder"))
             {
                 _launchTaskWindow = true;
-                return "ChatBot: Opening the Task Assistant window for you...";
+                ActivityLog.Log("Opened Task Assistant window.");
+                return "Opening the Task Assistant window for you...";
             }
 
             // Standard chatbot response
@@ -97,7 +99,7 @@ namespace Cybersecurity_Chatbot_GUI.Logic
             if (response == "Goodbye")
             {
                 _awaitingGoodbye = true;
-                return "ChatBot: Before you go, would you like to ask anything else? (yes/no)";
+                return "Before you go, would you like to ask anything else? (yes/no)";
             }
 
             _launchTaskWindow = false; // Reset task trigger after handling

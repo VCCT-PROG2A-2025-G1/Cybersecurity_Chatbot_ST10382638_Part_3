@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Logic\ActivityLog.cs" />
     <Compile Include="Logic\CyberQuiz.cs" />
     <Compile Include="Logic\Question.cs" />
     <Compile Include="Views\ChatWindow.xaml.cs">

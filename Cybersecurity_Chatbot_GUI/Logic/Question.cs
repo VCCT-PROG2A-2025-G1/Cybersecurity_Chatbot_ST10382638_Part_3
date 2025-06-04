@@ -32,10 +32,13 @@ namespace Cybersecurity_Chatbot_GUI.Logic
             {
                 if (int.TryParse(input, out int userChoice))
                 {
-                    return userChoice == CorrectIndex + 1; // UI shows 1-based index
+                    if (userChoice < 1 || userChoice > Options.Length)
+                    {
+                        return false; // ❌ Invalid choice number
+                    }
+                    return userChoice == CorrectIndex + 1; // ✅ Match answer
                 }
             }
-
             return false;
         }
 
@@ -56,5 +59,23 @@ namespace Cybersecurity_Chatbot_GUI.Logic
                 }
             }
         }
+
+        public bool IsValidInput(string input)
+        {
+            if (IsTrueFalse)
+            {
+                return input.Equals("true", StringComparison.OrdinalIgnoreCase) ||
+                       input.Equals("false", StringComparison.OrdinalIgnoreCase);
+            }
+            else
+            {
+                if (int.TryParse(input, out int choice))
+                {
+                    return choice >= 1 && choice <= Options.Length;
+                }
+                return false;
+            }
+        }
+
     }
 }

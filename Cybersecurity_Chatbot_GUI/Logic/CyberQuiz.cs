@@ -83,6 +83,17 @@ namespace Cybersecurity_Chatbot_GUI.Logic
 
             var current = _questions[_currentQuestionIndex];
 
+            // ✅ Validate input
+            if (!current.IsValidInput(input.Trim()))
+            {
+                string prompt = current.IsTrueFalse
+                    ? "Please enter True or False."
+                    : "Please enter a valid number between 1 and 4.";
+
+                return $"ChatBot: Invalid answer. {prompt}\n\n{current.Formatted}";
+            }
+
+            // ✅ Check answer
             bool correct = current.IsCorrect(input.Trim());
             if (correct) _score++;
 
@@ -91,11 +102,13 @@ namespace Cybersecurity_Chatbot_GUI.Logic
             if (_currentQuestionIndex >= _questions.Count)
             {
                 _quizInProgress = false;
-                return $"Quiz complete!\nScore: {_score}/{_questions.Count}\nType 'start quiz' to try again.";
+                return $"ChatBot: Quiz complete!\nScore: {_score}/{_questions.Count}\nType 'start quiz' to try again.";
             }
 
             return (correct ? "✅ Correct!\n" : "❌ Incorrect.\n") + GetNextQuestion();
         }
+
+
 
         public string GetNextQuestion()
         {
