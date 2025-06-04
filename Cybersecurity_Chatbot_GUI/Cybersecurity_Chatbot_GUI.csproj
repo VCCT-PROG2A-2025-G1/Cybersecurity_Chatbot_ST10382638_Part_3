@@ -94,5 +94,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cybersecurity_Chatbot.csproj">
+      <Project>{7110d3cb-52f4-4436-9ee0-efd5cfa6d9c5}</Project>
+      <Name>Cybersecurity_Chatbot</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
