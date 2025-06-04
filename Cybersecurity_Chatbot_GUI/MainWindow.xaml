@@ -5,8 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cybersecurity_Chatbot_GUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Cybersecurity Chatbot" Height="600" Width="900" 
+        Background="Black" WindowStartupLocation="CenterScreen">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="AsciiArtBlock" Grid.Row="0"
+                   FontFamily="Consolas" FontSize="16"
+                   Foreground="Lime"
+                   TextAlignment="Center"
+                   Margin="0,10,0,20"
+                   HorizontalAlignment="Center">
+        </TextBlock>
+
+        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" Width="300" Margin="0,20">
+            <Button Content="Chat With Bot" Click="Chat_Click" Margin="10" Height="40"/>
+            <Button Content="Task Assistant" Click="Task_Click" Margin="10" Height="40"/>
+            <Button Content="Quiz Game" Click="Quiz_Click" Margin="10" Height="40"/>
+            <Button Content="View Activity Log" Click="Log_Click" Margin="10" Height="40"/>
+            <Button Content="❌ Exit" Click="Exit_Click" Margin="10" Height="40" Background="DarkRed" Foreground="White"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="2" Foreground="Gray" FontSize="12" TextAlignment="Center" Margin="0,30,0,10">
+            © 2025 Cybersecurity Awareness Chatbot – Built by ST10382638
+        </TextBlock>
     </Grid>
 </Window>

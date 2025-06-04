@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Cybersecurity_Chatbot
 {
-    class StartUp
+    public class StartUp
     {
         // Path to the greeting audio file
         private static string filePath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Greeting Message.wav"));

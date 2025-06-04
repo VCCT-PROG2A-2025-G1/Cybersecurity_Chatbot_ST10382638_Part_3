@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace Cybersecurity_Chatbot
 {
-    internal class Memory
+    public class Memory
     {
         //------------------------------------------------------------------------------------------------------------------------//
         // Internal storage for chatbot memory

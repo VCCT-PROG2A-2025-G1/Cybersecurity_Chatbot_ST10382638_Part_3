@@ -24,5 +24,34 @@ namespace Cybersecurity_Chatbot_GUI
         {
             InitializeComponent();
         }
+
+        private void Chat_Click(object sender, RoutedEventArgs e)
+        {
+            var chatWindow = new ChatWindow();
+            chatWindow.Show();
+        }
+
+        private void Task_Click(object sender, RoutedEventArgs e)
+        {
+            var taskWindow = new TaskWindow();
+            taskWindow.Show();
+        }
+
+        private void Quiz_Click(object sender, RoutedEventArgs e)
+        {
+            var quizWindow = new QuizWindow();
+            quizWindow.Show();
+        }
+
+        private void Log_Click(object sender, RoutedEventArgs e)
+        {
+            var logWindow = new LogWindow();
+            logWindow.Show();
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }
