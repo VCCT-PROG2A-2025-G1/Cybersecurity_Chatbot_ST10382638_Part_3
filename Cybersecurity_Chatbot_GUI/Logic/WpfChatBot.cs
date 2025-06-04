@@ -20,6 +20,7 @@ namespace Cybersecurity_Chatbot_GUI.Logic
         public bool IsExitRequested => _exitRequested;
         public bool ShouldLaunchTaskWindow => _launchTaskWindow;
 
+        private CyberQuiz _quiz = new CyberQuiz();
         public WpfChatBot()
         {
             _username = "";
@@ -68,6 +69,18 @@ namespace Cybersecurity_Chatbot_GUI.Logic
                     _awaitingGoodbye = false;
                     return "ChatBot: Great! What else would you like to know?";
                 }
+            }
+
+            // ✅ If a quiz is running, send the answer to the quiz
+            if (_quiz.QuizInProgress)
+            {
+                return _quiz.SubmitAnswer(input);
+            }
+
+            // ✅ Start quiz trigger
+            if (input == "start quiz")
+            {
+                return _quiz.StartQuiz();
             }
 
             // ✅ NLP Trigger: Task Assistant
