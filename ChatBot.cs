@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 namespace Cybersecurity_Chatbot
 {
-    public class ChatBot
+    class ChatBot
     {
         //------------------------------------------------------------------------------------------------------------------------//
         /// <summary>

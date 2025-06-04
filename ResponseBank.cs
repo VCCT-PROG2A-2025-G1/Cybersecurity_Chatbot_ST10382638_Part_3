@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace Cybersecurity_Chatbot
 {
-    internal class ResponseBank
+    public class ResponseBank
     {
         //------------------------------------------------------------------------------------------------------------------------//
         // Declaring global random number generator
