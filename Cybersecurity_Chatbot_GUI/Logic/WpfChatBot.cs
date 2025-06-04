@@ -48,22 +48,20 @@ namespace Cybersecurity_Chatbot_GUI.Logic
 
         public string ProcessInput(string input)
         {
-            _launchTaskWindow = false; // ✅ Always reset this at start
+            _launchTaskWindow = false;
+
             if (string.IsNullOrWhiteSpace(input))
-            {
-                return "ChatBot: Please enter something so I can help you.";
-            }
+                return "Please enter something so I can help you.";
 
             input = input.Trim();
 
-            // Handle exit confirmation
             if (_awaitingGoodbye)
             {
                 string confirm = input.ToLower();
                 if (confirm == "no" || confirm == "n")
                 {
                     _exitRequested = true;
-                    return $"ChatBot: Goodbye {_username}, stay cyber safe!";
+                    return $"Goodbye {_username}, stay cyber safe!";
                 }
                 else
                 {
@@ -72,19 +70,23 @@ namespace Cybersecurity_Chatbot_GUI.Logic
                 }
             }
 
-            // ✅ If a quiz is running, send the answer to the quiz
+            if (input.ToLower() == "view log")
+            {
+                return $"Activity Log:\n\n{ActivityLog.GetFormattedLog()}";
+            }
+
             if (_quiz.QuizInProgress)
             {
+                ActivityLog.Log("Answered a quiz question.");
                 return _quiz.SubmitAnswer(input);
             }
 
-            // ✅ Start quiz trigger
-            if (input == "start quiz")
+            if (input.ToLower() == "start quiz")
             {
+                ActivityLog.Log("Started cybersecurity quiz.");
                 return _quiz.StartQuiz();
             }
 
-            // ✅ NLP Trigger: Task Assistant
             if (input.Contains("remind me") || input.Contains("add task") || input.Contains("set reminder"))
             {
                 _launchTaskWindow = true;
@@ -92,18 +94,15 @@ namespace Cybersecurity_Chatbot_GUI.Logic
                 return "Opening the Task Assistant window for you...";
             }
 
-            // Standard chatbot response
             string response = ResponseBank.GetResponse(input);
 
-            // Check for exit keyword
             if (response == "Goodbye")
             {
                 _awaitingGoodbye = true;
                 return "Before you go, would you like to ask anything else? (yes/no)";
             }
 
-            _launchTaskWindow = false; // Reset task trigger after handling
-            return $"ChatBot: {response}";
+            return response;
         }
 
         public void Reset()

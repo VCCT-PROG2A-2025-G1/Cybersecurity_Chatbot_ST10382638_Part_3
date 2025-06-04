@@ -34,9 +34,9 @@ namespace Cybersecurity_Chatbot_GUI.Logic
                 {
                     if (userChoice < 1 || userChoice > Options.Length)
                     {
-                        return false; // ❌ Invalid choice number
+                        return false;
                     }
-                    return userChoice == CorrectIndex + 1; // ✅ Match answer
+                    return userChoice == CorrectIndex + 1;
                 }
             }
             return false;

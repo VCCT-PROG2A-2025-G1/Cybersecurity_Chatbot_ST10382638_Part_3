@@ -72,12 +72,12 @@ namespace Cybersecurity_Chatbot_GUI.Views
 
         private void ReminderDaysBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !int.TryParse(e.Text, out _); // Only allow digits
+            e.Handled = !int.TryParse(e.Text, out _); 
         }
 
         private void GoBack_Click(object sender, RoutedEventArgs e)
         {
-            this.Close(); // Simply closes the window and returns to chat
+            this.Close();
         }
         private void OnReminderBoxPaste(object sender, DataObjectPastingEventArgs e)
         {
@@ -86,12 +86,12 @@ namespace Cybersecurity_Chatbot_GUI.Views
                 string pastedText = (string)e.DataObject.GetData(typeof(string));
                 if (!int.TryParse(pastedText, out _))
                 {
-                    e.CancelCommand(); // Block paste if it's not a number
+                    e.CancelCommand();
                 }
             }
             else
             {
-                e.CancelCommand(); // Block paste if no text present
+                e.CancelCommand();
             }
         }
 

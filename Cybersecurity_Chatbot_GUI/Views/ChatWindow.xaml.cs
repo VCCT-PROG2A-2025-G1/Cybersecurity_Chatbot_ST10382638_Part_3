@@ -31,21 +31,21 @@ namespace Cybersecurity_Chatbot_GUI.Views
             UserInputTextBox.IsEnabled = false;
             SendButton.IsEnabled = false;
 
-            // 2. Play ASCII and voice
+            
             string art = await _chatBot.PlayStartupAsyncWpf();
             AppendSystemMessage(art);
 
             await Task.Delay(500);
 
-            // 3. Show startup messages
+            
             AppendMessage("ChatBot", "Type /Help for help");
             AppendMessage("ChatBot", "Hello! What is your name?");
 
-            // 4. Re-enable input after greeting
+            
             UserInputTextBox.IsEnabled = true;
             SendButton.IsEnabled = true;
 
-            // 5. Focus the input box
+            
             UserInputTextBox.Focus();
         }
 
@@ -60,11 +60,11 @@ namespace Cybersecurity_Chatbot_GUI.Views
             if (e.Key == Key.Enter)
             {
                 HandleUserInput();
-                e.Handled = true; // Prevent ding sound
+                e.Handled = true;
             }
         }
 
-        private void HandleUserInput()
+        private async void HandleUserInput()
         {
             string input = UserInputTextBox.Text.Trim();
             if (string.IsNullOrWhiteSpace(input))
@@ -79,9 +79,9 @@ namespace Cybersecurity_Chatbot_GUI.Views
             else
                 botReply = _chatBot.ProcessInput(input);
 
-            AppendMessage("ChatBot", botReply);
+            await AppendTypingMessageAsync("ChatBot", botReply);
 
-            // ✅ ADD THIS BLOCK TO HANDLE TASK WINDOW
+
             if (_chatBot.ShouldLaunchTaskWindow)
             {
                 TaskWindow taskWindow = new TaskWindow();
@@ -128,5 +128,52 @@ namespace Cybersecurity_Chatbot_GUI.Views
             ChatStackPanel.Children.Add(messageBlock);
             ChatScrollViewer.ScrollToEnd();
         }
+
+        private async Task AppendTypingMessageAsync(string sender, string message, int delay = 20)
+        {
+            TextBlock thinkingBlock = new TextBlock
+            {
+                Text = "ChatBot is thinking.",
+                FontStyle = FontStyles.Italic,
+                FontSize = 13,
+                Margin = new Thickness(5),
+                Foreground = Brushes.Gray
+            };
+
+            ChatStackPanel.Children.Add(thinkingBlock);
+            ChatScrollViewer.ScrollToEnd();
+
+            for (int i = 0; i < 3; i++)
+            {
+                await Task.Delay(350);
+                thinkingBlock.Text += ".";
+                ChatScrollViewer.ScrollToEnd();
+            }
+
+            await Task.Delay(500);
+
+            ChatStackPanel.Children.Remove(thinkingBlock);
+
+            TextBlock typingBlock = new TextBlock
+            {
+                Text = sender + ": ",
+                TextWrapping = TextWrapping.Wrap,
+                FontSize = 14,
+                Margin = new Thickness(5),
+                Foreground = sender == "You" ? Brushes.LightGreen : Brushes.Cyan
+            };
+
+            ChatStackPanel.Children.Add(typingBlock);
+            ChatScrollViewer.ScrollToEnd();
+
+            foreach (char c in message)
+            {
+                typingBlock.Text += c;
+                await Task.Delay(delay);
+                ChatScrollViewer.ScrollToEnd();
+            }
+        }
+
+
     }
 }
