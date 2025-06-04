@@ -52,8 +52,8 @@ This is the final WPF-based version of the **Cybersecurity Awareness Chatbot**, 
 
 ### How to Run
 
-1. **Download ZIP:**
-   [https://github.com/VCCT-PROG2A-2025-G1/Cybersecurity_Chatbot_ST10382638]([https://github.com/VCCT-PROG2A-2025-G1/Cybersecurity_Chatbot_ST10382638](https://github.com/VCCT-PROG2A-2025-G1/Cybersecurity_Chatbot_ST10382638_Part_3))
+1. **Download ZIP:**  
+   [https://github.com/VCCT-PROG2A-2025-G1/Cybersecurity_Chatbot_ST10382638_Part_3](https://github.com/VCCT-PROG2A-2025-G1/Cybersecurity_Chatbot_ST10382638_Part_3)
 
 2. Extract the contents.
 
