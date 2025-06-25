@@ -12,12 +12,14 @@ namespace Cybersecurity_Chatbot_GUI.Logic
         public string[] Options { get; }
         public int CorrectIndex { get; }
         public bool IsTrueFalse { get; }
+        public string Explanation { get; }
 
-        public Question(string text, string[] options, int correctIndex, bool isTrueFalse = false)
+        public Question(string text, string[] options, int correctIndex, string explanation, bool isTrueFalse = false)
         {
             Text = text;
             Options = options;
             CorrectIndex = correctIndex;
+            Explanation = explanation;
             IsTrueFalse = isTrueFalse;
         }
 

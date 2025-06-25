@@ -6,6 +6,7 @@ using System.Linq;
 using System.Media;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Cybersecurity_Chatbot_GUI.Logic
 {
@@ -20,12 +21,15 @@ namespace Cybersecurity_Chatbot_GUI.Logic
         public bool IsExitRequested => _exitRequested;
         public bool ShouldLaunchTaskWindow => _launchTaskWindow;
 
+        private int _logOffset = 0;
+
         private CyberQuiz _quiz = new CyberQuiz();
         public WpfChatBot()
         {
             _username = "";
             _exitRequested = false;
             _awaitingGoodbye = false;
+            _launchTaskWindow = false;
         }
 
         public async Task<string> InitializeAsync()
@@ -48,61 +52,60 @@ namespace Cybersecurity_Chatbot_GUI.Logic
 
         public string ProcessInput(string input)
         {
+            // reset window‐launch flag on every new input
             _launchTaskWindow = false;
 
-            if (string.IsNullOrWhiteSpace(input))
-                return "Please enter something so I can help you.";
+            input = input?.Trim() ?? "";
+            if (string.IsNullOrEmpty(input))
+                return "Please say something!";
 
-            input = input.Trim();
+            // 1) Recognise intent
+            var intent = IntentRecognizer.Recognize(input);
+            ActivityLog.Log($"Recognized intent: {intent}");
 
-            if (_awaitingGoodbye)
+            // 2) Dispatch
+            switch (intent)
             {
-                string confirm = input.ToLower();
-                if (confirm == "no" || confirm == "n")
-                {
-                    _exitRequested = true;
-                    return $"Goodbye {_username}, stay cyber safe!";
-                }
-                else
-                {
-                    _awaitingGoodbye = false;
-                    return "Great! What else would you like to know?";
-                }
+                case Intent.SubmitQuizAnswer:
+                    return _quiz.SubmitAnswer(input);
+
+                case Intent.StartQuiz:
+                    ActivityLog.Log("Quiz started");
+                    return _quiz.StartQuiz();
+
+                case Intent.AddTask:
+                case Intent.OpenTasks:
+                    ActivityLog.Log($"{intent} intent");
+                    _launchTaskWindow = true;
+                    return intent == Intent.AddTask
+                        ? "Adding a new task…"
+                        : "Opening Task Assistant…";
+
+                case Intent.ShowLog:
+                    _logOffset = 0;
+                    return ShowLogEntries();
+
+                case Intent.ShowMoreLog:
+                    _logOffset += 5;
+                    return ShowLogEntries();
+
+                default:
+                    return ResponseBank.GetResponse(input);
             }
+        }
 
-            if (input.ToLower() == "view log")
-            {
-                return $"Activity Log:\n\n{ActivityLog.GetFormattedLog()}";
-            }
+        private string ShowLogEntries()
+        {
+            var all = ActivityLog.GetEntries();           // returns List<string>
+            var paged = all
+                .Skip(Math.Max(0, all.Count - 5 - _logOffset))
+                .Take(5)
+                .ToList();
 
-            if (_quiz.QuizInProgress)
-            {
-                ActivityLog.Log("Answered a quiz question.");
-                return _quiz.SubmitAnswer(input);
-            }
+            if (!paged.Any())
+                return "No more log entries.";
 
-            if (input.ToLower() == "start quiz")
-            {
-                ActivityLog.Log("Started cybersecurity quiz.");
-                return _quiz.StartQuiz();
-            }
-
-            if (input.Contains("remind me") || input.Contains("add task") || input.Contains("set reminder"))
-            {
-                _launchTaskWindow = true;
-                ActivityLog.Log("Opened Task Assistant window.");
-                return "Opening the Task Assistant window for you...";
-            }
-
-            string response = ResponseBank.GetResponse(input);
-
-            if (response == "Goodbye")
-            {
-                _awaitingGoodbye = true;
-                return "Before you go, would you like to ask anything else? (yes/no)";
-            }
-
-            return response;
+            return "Activity Log:\n" + string.Join("\n", paged);
         }
 
         public void Reset()
