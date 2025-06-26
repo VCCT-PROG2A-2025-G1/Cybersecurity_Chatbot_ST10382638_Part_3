@@ -3,10 +3,10 @@
 // Group: 1
 
 // References: 
-//   https://learn.microsoft.com/en-us/dotnet/desktop/wpf/overview/?view=netdesktop-7.0
-//   https://learn.microsoft.com/en-us/dotnet/api/system.windows.window?view=windowsdesktop-7.0
-//   https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.textblock?view=windowsdesktop-7.0
+//   https://www.w3schools.com/cs/index.php#gsc.tab=0
+//   https://stackoverflow.com/questions
 //   ChatGPT, OpenAI (2025), assisted with async method structure, UI interaction logic, and formatting.
+
 
 using Cybersecurity_Chatbot_GUI.Logic;
 using System;

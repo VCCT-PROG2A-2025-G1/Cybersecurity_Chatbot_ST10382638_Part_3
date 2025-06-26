@@ -1,4 +1,13 @@
-﻿using Cybersecurity_Chatbot_GUI.Logic;
+﻿// Name: Luc de Marillac St Julein
+// Student Number: ST10382638
+// Group: 1
+
+// References:
+//   https://www.w3schools.com/cs/index.php#gsc.tab=0
+//   https://stackoverflow.com/questions
+//   ChatGPT, OpenAI (2025), assisted with JSON serialization, WPF event handling, and task reminder logic.
+
+using Cybersecurity_Chatbot_GUI.Logic;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,12 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using Newtonsoft.Json;
 
@@ -25,27 +29,37 @@ namespace Cybersecurity_Chatbot_GUI.Views
     {
         private List<(string Title, string Description, DateTime Due)> tasks = new List<(string, string, DateTime)>();
 
-        private readonly string dataDir =
-            System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                         "CybersecurityChatbot");
+        private readonly string dataDir = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "CybersecurityChatbot");
 
         private readonly string dataPath;
+
+        //------------------------------------------------------------------------------------------------------------------------//
+        /// <summary>
+        /// Constructor: Initializes the window and loads tasks from disk
+        /// </summary>
         public TaskWindow()
         {
             InitializeComponent();
-            dataPath = System.IO.Path.Combine(dataDir, "tasks.json");
+            dataPath = Path.Combine(dataDir, "tasks.json");
             LoadTasks();
         }
 
+        //------------------------------------------------------------------------------------------------------------------------//
+        /// <summary>
+        /// Pre-fills date and time inputs on window load
+        /// </summary>
         private void TaskWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            // pre-fill with today’s date
             TaskDueDatePicker.SelectedDate = DateTime.Now.Date;
-
-            // pre-fill with current time in HH:mm format
             TaskDueTimeBox.Text = DateTime.Now.ToString("HH:mm");
         }
 
+        //------------------------------------------------------------------------------------------------------------------------//
+        /// <summary>
+        /// Adds a new task to the list and schedules a reminder
+        /// </summary>
         private void AddTask_Click(object sender, RoutedEventArgs e)
         {
             var title = TaskTitleBox.Text?.Trim();
@@ -68,20 +82,21 @@ namespace Cybersecurity_Chatbot_GUI.Views
             tasks.Add((title, desc, due));
             TaskList.Items.Add($"{title}  (Due: {due:g})");
 
-            // schedule reminder
             ScheduleReminder((title, desc, due));
 
-            // log and persist
             ActivityLog.Log($"Task added: \"{title}\" due {due:g}");
             SaveTasks();
 
-            // clear inputs
             TaskTitleBox.Clear();
             TaskDescBox.Clear();
             TaskDueDatePicker.SelectedDate = null;
             TaskDueTimeBox.Clear();
         }
 
+        //------------------------------------------------------------------------------------------------------------------------//
+        /// <summary>
+        /// Marks a selected task as completed and removes it
+        /// </summary>
         private void CompleteTask_Click(object sender, RoutedEventArgs e)
         {
             var idx = TaskList.SelectedIndex;
@@ -95,6 +110,10 @@ namespace Cybersecurity_Chatbot_GUI.Views
             SaveTasks();
         }
 
+        //------------------------------------------------------------------------------------------------------------------------//
+        /// <summary>
+        /// Deletes a selected task from the list
+        /// </summary>
         private void DeleteTask_Click(object sender, RoutedEventArgs e)
         {
             var idx = TaskList.SelectedIndex;
@@ -108,19 +127,30 @@ namespace Cybersecurity_Chatbot_GUI.Views
             SaveTasks();
         }
 
+        //------------------------------------------------------------------------------------------------------------------------//
+        /// <summary>
+        /// Restricts ReminderDaysBox to accept numeric input only
+        /// </summary>
         private void ReminderDaysBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !int.TryParse(e.Text, out _); 
+            e.Handled = !int.TryParse(e.Text, out _);
         }
 
+        //------------------------------------------------------------------------------------------------------------------------//
+        /// <summary>
+        /// Closes the Task window
+        /// </summary>
         private void GoBack_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
+        //------------------------------------------------------------------------------------------------------------------------//
+        /// <summary>
+        /// Loads tasks from JSON file and restores reminders
+        /// </summary>
         private void LoadTasks()
         {
-            // ensure folder
             if (!Directory.Exists(dataDir))
                 Directory.CreateDirectory(dataDir);
 
@@ -134,7 +164,6 @@ namespace Cybersecurity_Chatbot_GUI.Views
                     .DeserializeObject<List<(string, string, DateTime)>>(json)
                     ?? new List<(string, string, DateTime)>();
 
-                // repopulate UI & re-schedule reminders
                 foreach (var t in tasks)
                 {
                     TaskList.Items.Add($"{t.Title}  (Due: {t.Due:g})");
@@ -143,17 +172,24 @@ namespace Cybersecurity_Chatbot_GUI.Views
             }
             catch
             {
-                // if corruption, start fresh
                 tasks = new List<(string, string, DateTime)>();
             }
         }
 
+        //------------------------------------------------------------------------------------------------------------------------//
+        /// <summary>
+        /// Saves the current task list to disk as JSON
+        /// </summary>
         private void SaveTasks()
         {
             var json = JsonConvert.SerializeObject(tasks);
             File.WriteAllText(dataPath, json);
         }
 
+        //------------------------------------------------------------------------------------------------------------------------//
+        /// <summary>
+        /// Sets up a one-time WPF timer reminder for a task
+        /// </summary>
         private void ScheduleReminder((string Title, string Description, DateTime Due) t)
         {
             var interval = t.Due - DateTime.Now;
@@ -176,3 +212,4 @@ namespace Cybersecurity_Chatbot_GUI.Views
         }
     }
 }
+//------------------------------------------...ooo000 END OF FILE 000ooo...------------------------------------------------------//

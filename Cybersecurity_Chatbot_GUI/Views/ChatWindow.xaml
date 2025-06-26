@@ -1,9 +1,24 @@
-﻿<Window x:Class="Cybersecurity_Chatbot_GUI.Views.ChatWindow"
+﻿<!-- 
+  Name: Luc de Marillac St Julein
+  Student Number: ST10382638
+  Group: 1
+
+  References:
+    https://www.w3schools.com/cs/index.php#gsc.tab=0
+    https://stackoverflow.com/questions
+    ChatGPT, OpenAI (2025), assisted with WPF layout, binding, and styling
+-->
+
+<Window x:Class="Cybersecurity_Chatbot_GUI.Views.ChatWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Cybersecurity Chatbot" Height="600" Width="500"
-        WindowStartupLocation="CenterScreen" Background="#1E1E2F"
+        Title="Cybersecurity Chatbot"
+        Height="600"
+        Width="500"
+        WindowStartupLocation="CenterScreen"
+        Background="#1E1E2F"
         Loaded="Window_Loaded">
+
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -11,6 +26,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
+        <!-- Title Header -->
         <TextBlock Text="CYBERSECURITY CHATBOT"
                    FontSize="22"
                    FontWeight="Bold"
@@ -18,10 +34,15 @@
                    HorizontalAlignment="Center"
                    Margin="0 0 0 10" />
 
-        <ScrollViewer Grid.Row="1" Name="ChatScrollViewer" VerticalScrollBarVisibility="Auto" Background="#111">
+        <!-- Chat Display Panel -->
+        <ScrollViewer Grid.Row="1"
+                      Name="ChatScrollViewer"
+                      VerticalScrollBarVisibility="Auto"
+                      Background="#111">
             <StackPanel Name="ChatStackPanel" Margin="5"/>
         </ScrollViewer>
 
+        <!-- Input Section -->
         <DockPanel Grid.Row="2" Margin="0 10 0 0">
             <TextBox Name="UserInputTextBox"
                      IsEnabled="False"
@@ -52,3 +73,5 @@
         </DockPanel>
     </Grid>
 </Window>
+
+<!-- END OF FILE -->

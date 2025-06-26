@@ -1,4 +1,13 @@
-﻿using System;
+﻿// Name: Luc de Marillac St Julein
+// Student Number: ST10382638
+// Group: 1
+
+// References:
+//   https://www.w3schools.com/cs/index.php#gsc.tab=0
+//   https://stackoverflow.com/questions
+//   ChatGPT, OpenAI (2025), assisted with validation logic, string formatting, and class structure.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +17,17 @@ namespace Cybersecurity_Chatbot_GUI.Logic
 {
     internal class Question
     {
+        // Question properties
         public string Text { get; }
         public string[] Options { get; }
         public int CorrectIndex { get; }
         public bool IsTrueFalse { get; }
         public string Explanation { get; }
 
+        //------------------------------------------------------------------------------------------------------------------------//
+        /// <summary>
+        /// Constructor to initialize question content and configuration.
+        /// </summary>
         public Question(string text, string[] options, int correctIndex, string explanation, bool isTrueFalse = false)
         {
             Text = text;
@@ -23,6 +37,10 @@ namespace Cybersecurity_Chatbot_GUI.Logic
             IsTrueFalse = isTrueFalse;
         }
 
+        //------------------------------------------------------------------------------------------------------------------------//
+        /// <summary>
+        /// Checks if the user's input is correct for the current question.
+        /// </summary>
         public bool IsCorrect(string input)
         {
             if (IsTrueFalse)
@@ -44,6 +62,10 @@ namespace Cybersecurity_Chatbot_GUI.Logic
             return false;
         }
 
+        //------------------------------------------------------------------------------------------------------------------------//
+        /// <summary>
+        /// Returns a formatted string representing the question for display.
+        /// </summary>
         public string Formatted
         {
             get
@@ -62,6 +84,10 @@ namespace Cybersecurity_Chatbot_GUI.Logic
             }
         }
 
+        //------------------------------------------------------------------------------------------------------------------------//
+        /// <summary>
+        /// Validates the format and range of a user’s input.
+        /// </summary>
         public bool IsValidInput(string input)
         {
             if (IsTrueFalse)
@@ -78,6 +104,6 @@ namespace Cybersecurity_Chatbot_GUI.Logic
                 return false;
             }
         }
-
     }
 }
+//------------------------------------------...ooo000 END OF FILE 000ooo...------------------------------------------------------//
