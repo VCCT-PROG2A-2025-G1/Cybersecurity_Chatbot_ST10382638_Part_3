@@ -82,6 +82,7 @@ namespace Cybersecurity_Chatbot_GUI.Logic
         /// </summary>
         public string ProcessInput(string input)
         {
+            // reset window‐flags
             _launchTaskWindow = false;
             _launchLogWindow = false;
 
@@ -89,9 +90,41 @@ namespace Cybersecurity_Chatbot_GUI.Logic
             if (string.IsNullOrEmpty(input))
                 return "Please say something!";
 
+            // 1) If we’re waiting on the goodbye‐confirmation, handle yes/no
+            if (_awaitingGoodbye)
+            {
+                if (input.Equals("no", StringComparison.OrdinalIgnoreCase) ||
+                    input.Equals("n", StringComparison.OrdinalIgnoreCase))
+                {
+                    ActivityLog.Log("User confirmed exit");
+                    _exitRequested = true;
+                    _awaitingGoodbye = false;
+                    return $"Goodbye {_username}, stay cyber safe!";
+                }
+                if (input.Equals("yes", StringComparison.OrdinalIgnoreCase) ||
+                    input.Equals("y", StringComparison.OrdinalIgnoreCase))
+                {
+                    ActivityLog.Log("User declined exit");
+                    _awaitingGoodbye = false;
+                    return "Great! What else would you like to know?";
+                }
+                // any other answer
+                return "Please answer yes or no. Would you like to ask anything else? (yes/no)";
+            }
+
+            // 2) Normal “goodbye/exit/quit” trigger
+            if (input.Equals("goodbye", StringComparison.OrdinalIgnoreCase) ||
+                input.Equals("exit", StringComparison.OrdinalIgnoreCase) ||
+                input.Equals("quit", StringComparison.OrdinalIgnoreCase))
+            {
+                ActivityLog.Log("Exit requested");
+                _awaitingGoodbye = true;
+                return "Before you go, would you like to ask anything else? (yes/no)";
+            }
+
+            // 3) Otherwise, your existing intent‐based switch…
             var intent = IntentRecognizer.Recognize(input);
             ActivityLog.Log($"Recognized intent: {intent}");
-
             switch (intent)
             {
                 case Intent.SubmitQuizAnswer:
@@ -118,6 +151,7 @@ namespace Cybersecurity_Chatbot_GUI.Logic
                     return ResponseBank.GetResponse(input);
             }
         }
+
 
         //------------------------------------------------------------------------------------------------------------------------//
         /// <summary>

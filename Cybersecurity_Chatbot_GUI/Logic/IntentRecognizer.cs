@@ -42,48 +42,36 @@ namespace Cybersecurity_Chatbot_GUI.Logic
         {
             var lower = input.ToLowerInvariant().Trim();
 
-            // 1) Pure number or boolean answer → quiz answer
+            // 1) Quiz answers: numbers OR “true”/“false”
             if (Regex.IsMatch(lower, @"^\d+$")
              || lower == "true"
              || lower == "false")
-            {
                 return Intent.SubmitQuizAnswer;
-            }
 
             // 2) Start quiz
             if (Regex.IsMatch(lower, @"\b(start|begin)\s+(quiz|test)\b")
              || Regex.IsMatch(lower, @"\bquiz me\b"))
-            {
                 return Intent.StartQuiz;
-            }
 
             // 3) Add task
             if (Regex.IsMatch(lower, @"\b(add|create)\s+(a\s)?task\b"))
-            {
                 return Intent.AddTask;
-            }
 
-            // 4) Open/show tasks
-            if (Regex.IsMatch(lower, @"\b(show|open|view)\s+(tasks|reminders)\b"))
-            {
+            // 4) **Open / show tasks**  ← this is the one you need
+            if (Regex.IsMatch(lower, @"\b(show|open|view)\s+(tasks?|reminders?)\b"))
                 return Intent.OpenTasks;
-            }
 
-            // 5) Show log
+            // 5) Show activity log
             if (Regex.IsMatch(lower, @"\b(show|view)\s+(log|history)\b"))
-            {
                 return Intent.ShowLog;
-            }
 
-            // 6) Show more log entries
+            // 6) Page activity log
             if (Regex.IsMatch(lower, @"\b(show|view)\s+(more|next)\b"))
-            {
                 return Intent.ShowMoreLog;
-            }
 
-            // Default fallback
             return Intent.Unknown;
         }
+
     }
 }
 //------------------------------------------...ooo000 END OF FILE 000ooo...------------------------------------------------------//
