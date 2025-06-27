@@ -83,29 +83,9 @@ This is the final WPF-based version of the **Cybersecurity Awareness Chatbot**, 
 
 ---
 
-## 📹 Demo Video & Submission Guidelines
+## 📹 Demo Video
 
-* **Length:** Max 15 minutes (≤5 min code / ≤10 min demo)
-* **Format:** Unlisted YouTube link
-* **Requirements:** Include face/voice introduction, explain code logic (no line-by-line), showcase each Part 3 feature in-app
-
-🔗 Watch: [https://youtu.be/\_d8Ma3ey9tc](https://youtu.be/_d8Ma3ey9tc)
-
----
-
-## 📁 Project Structure (Key Files)
-
-* **App.xaml / App.xaml.cs** – Application startup logic
-* **ChatWindow\.xaml / .cs** – Main chat UI & input processing
-* **TaskWindow\.xaml / .cs** – Task Assistant GUI with Title, Description, DatePicker, Reminder
-* **QuizWindow\.xaml / .cs** – Cybersecurity Quiz GUI
-* **ActivityLogWindow\.xaml / .cs** – Activity Log GUI
-* **WpfChatBot.cs** – Core NLP, memory, sentiment, and window-launch logic
-* **CyberQuiz.cs / Question.cs** – Quiz data and parsing
-* **ActivityLog.cs** – Global log storage and paging
-* **Memory.cs** – Persistent user preference store
-* **Assets/** – `Greeting.wav`, ASCII art text file, etc.
-* **.github/workflows/ci.yml** – CI build & lint checks
+🔗 Watch: [https://youtu.be/\_d8Ma3ey9tc](https://youtu.be/l926x3jCbWg)
 
 ---
 
